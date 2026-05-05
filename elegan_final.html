@@ -1,0 +1,1631 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Elegan Generator — Sanoat Dizel Generatorlari</title>
+<meta name="description" content="16 kW dan 2000 kW gacha dizel generatorlar. To'g'ridan-to'g'ri ishlab chiqaruvchidan.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     TELEGRAM BOT SOZLASH:
+     1. @BotFather → /newbot → token oling
+     2. Botga /start yuboring  
+     3. https://api.telegram.org/bot<TOKEN>/getUpdates → chat_id oling
+     4. Quyidagi BOT_TOKEN va CHAT_ID ni to'ldiring
+     ═══════════════════════════════════════════════════════════════════ -->
+
+<style>
+/* ── RESET & BASE ──────────────────────────────────────────────────── */
+*{box-sizing:border-box;margin:0;padding:0;-webkit-font-smoothing:antialiased}
+:root{
+  --navy:#0a1628;
+  --navy2:#0f2347;
+  --navy3:#1a3a6e;
+  --gold:#c8912a;
+  --gold2:#e6a832;
+  --gold3:#f0c060;
+  --white:#ffffff;
+  --off:#f4f6fb;
+  --off2:#edf0f8;
+  --muted:#4a6194;
+  --border:rgba(15,35,71,.1);
+  --border2:rgba(15,35,71,.06);
+  --r:14px;
+  --r2:20px;
+  --r3:100px;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Manrope',sans-serif;color:var(--navy);background:var(--white);overflow-x:hidden;line-height:1.5}
+img{max-width:100%;display:block}
+a{text-decoration:none;color:inherit}
+button{font-family:inherit;cursor:pointer;border:none;background:none}
+input,textarea,select{font-family:inherit}
+
+/* ── ANIMATIONS ────────────────────────────────────────────────────── */
+@keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes pulse2{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.8)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes revealH{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 0% 0 0)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
+
+.anim-up{opacity:0;transform:translateY(32px);transition:opacity .7s cubic-bezier(.22,.7,.2,1),transform .7s cubic-bezier(.22,.7,.2,1)}
+.anim-up.visible{opacity:1;transform:translateY(0)}
+.anim-up.d1{transition-delay:.1s}
+.anim-up.d2{transition-delay:.2s}
+.anim-up.d3{transition-delay:.3s}
+.anim-up.d4{transition-delay:.4s}
+
+/* ── TYPOGRAPHY ────────────────────────────────────────────────────── */
+.display{font-size:clamp(2.8rem,7vw,6rem);font-weight:900;line-height:.92;letter-spacing:-.04em}
+.h1{font-size:clamp(2.2rem,5vw,4rem);font-weight:800;line-height:.95;letter-spacing:-.035em}
+.h2{font-size:clamp(1.8rem,4vw,3rem);font-weight:800;line-height:1;letter-spacing:-.03em}
+.h3{font-size:clamp(1.1rem,2vw,1.5rem);font-weight:700;letter-spacing:-.02em;line-height:1.2}
+.tag{font-size:.65rem;font-weight:800;letter-spacing:.3em;text-transform:uppercase}
+.body{font-size:.95rem;line-height:1.75;color:var(--muted)}
+.small{font-size:.75rem;font-weight:600;letter-spacing:.05em}
+
+/* ── LAYOUT ────────────────────────────────────────────────────────── */
+.wrap{max-width:1160px;margin:0 auto;padding:0 clamp(1.25rem,4vw,3rem)}
+.section{padding:clamp(4rem,9vw,7.5rem) 0}
+
+/* ── NAVBAR ────────────────────────────────────────────────────────── */
+#navbar{
+  position:fixed;top:0;left:0;right:0;z-index:500;
+  padding:1rem clamp(1.25rem,4vw,3rem);
+  display:flex;align-items:center;justify-content:space-between;gap:1rem;
+  transition:all .35s ease;
+}
+#navbar.scrolled{
+  background:rgba(255,255,255,.96);
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border2);
+  box-shadow:0 4px 32px rgba(10,22,40,.06);
+  padding:.75rem clamp(1.25rem,4vw,3rem);
+}
+.nav-logo{font-size:1.15rem;font-weight:900;letter-spacing:-.04em;color:var(--white);transition:color .3s}
+#navbar.scrolled .nav-logo{color:var(--navy)}
+.nav-links-wrap{display:flex;align-items:center;gap:.25rem}
+.nav-link{font-size:.78rem;font-weight:600;padding:.5rem .85rem;border-radius:var(--r3);color:rgba(255,255,255,.75);transition:all .2s;letter-spacing:.01em}
+.nav-link:hover{color:#fff;background:rgba(255,255,255,.1)}
+#navbar.scrolled .nav-link{color:var(--muted)}
+#navbar.scrolled .nav-link:hover{color:var(--navy);background:var(--off)}
+
+.lang-sw{display:flex;gap:2px;background:rgba(255,255,255,.12);border-radius:var(--r3);padding:3px;transition:background .3s}
+#navbar.scrolled .lang-sw{background:var(--off)}
+.lb{padding:3px 10px;border-radius:var(--r3);font-size:.65rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.5);transition:all .2s}
+.lb.active{background:var(--navy);color:#fff}
+#navbar.scrolled .lb{color:var(--muted)}
+#navbar.scrolled .lb.active{background:var(--navy);color:#fff}
+
+.nav-cta-btn{background:var(--gold);color:var(--navy);padding:.5rem 1.25rem;border-radius:var(--r3);font-size:.76rem;font-weight:800;letter-spacing:.02em;transition:all .2s;white-space:nowrap}
+.nav-cta-btn:hover{background:var(--gold2);transform:translateY(-1px)}
+
+/* ── HERO ──────────────────────────────────────────────────────────── */
+#hero{
+  background:var(--navy);
+  min-height:100vh;
+  display:flex;flex-direction:column;justify-content:center;align-items:center;
+  text-align:center;
+  position:relative;overflow:hidden;
+  padding:calc(80px + 4rem) clamp(1.25rem,5vw,4rem) 6rem;
+}
+.hero-grid{
+  position:absolute;inset:0;pointer-events:none;
+  background-image:
+    linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px);
+  background-size:64px 64px;
+}
+.hero-glow{
+  position:absolute;top:40%;left:50%;transform:translate(-50%,-50%);
+  width:80vw;height:60vh;
+  background:radial-gradient(ellipse,rgba(200,145,42,.22) 0%,transparent 68%);
+  pointer-events:none;
+}
+.hero-glow2{
+  position:absolute;bottom:-10%;right:-5%;
+  width:40vw;height:40vw;
+  background:radial-gradient(ellipse,rgba(26,58,110,.6) 0%,transparent 65%);
+  pointer-events:none;
+}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:.6rem;
+  padding:.45rem 1.1rem;border:1px solid rgba(255,255,255,.14);
+  border-radius:var(--r3);margin-bottom:2.5rem;
+  animation:fadeUp .7s .2s both;
+}
+.hero-badge-dot{width:7px;height:7px;background:var(--gold2);border-radius:50%;animation:pulse2 2s infinite}
+.hero-badge-text{font-size:.65rem;font-weight:700;letter-spacing:.25em;text-transform:uppercase;color:rgba(255,255,255,.6)}
+.hero-h1{animation:fadeUp .9s .4s both;margin-bottom:1.5rem}
+.hero-h1 em{color:var(--gold2);font-style:normal;font-weight:300}
+.hero-sub{
+  font-size:clamp(.9rem,1.6vw,1.1rem);color:rgba(255,255,255,.5);
+  max-width:540px;line-height:1.8;margin:0 auto 2.5rem;
+  animation:fadeUp .7s .6s both;
+}
+.hero-btns{display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap;animation:fadeUp .7s .75s both;margin-bottom:5rem}
+.btn-gold{
+  display:inline-flex;align-items:center;gap:.6rem;
+  background:var(--gold);color:var(--navy);
+  padding:.9rem 1.9rem;border-radius:var(--r3);
+  font-size:.88rem;font-weight:800;letter-spacing:.02em;
+  box-shadow:0 8px 28px rgba(200,145,42,.35);
+  transition:all .25s;
+}
+.btn-gold:hover{background:var(--gold2);transform:translateY(-2px);box-shadow:0 12px 36px rgba(200,145,42,.45)}
+.btn-outline-light{
+  display:inline-flex;align-items:center;gap:.6rem;
+  border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.8);
+  padding:.9rem 1.9rem;border-radius:var(--r3);
+  font-size:.88rem;font-weight:600;
+  transition:all .25s;
+}
+.btn-outline-light:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.4)}
+.hero-stats{
+  display:flex;gap:clamp(2rem,6vw,5rem);flex-wrap:wrap;justify-content:center;
+  animation:fadeUp .7s .95s both;
+}
+.hero-stat-num{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:900;color:#fff;letter-spacing:-.04em}
+.hero-stat-lbl{font-size:.62rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-top:.2rem}
+.hero-scroll{
+  position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:.4rem;
+  animation:fadeIn 1s 1.5s both;
+}
+.hero-scroll span{font-size:.58rem;letter-spacing:.25em;text-transform:uppercase;color:rgba(255,255,255,.25);font-weight:700}
+.hero-scroll-line{width:1px;height:40px;background:linear-gradient(to bottom,rgba(255,255,255,.25),transparent)}
+
+/* ── MARQUEE ───────────────────────────────────────────────────────── */
+.marquee-section{overflow:hidden;background:rgba(255,255,255,.03);border-top:1px solid rgba(255,255,255,.06);border-bottom:1px solid rgba(255,255,255,.06)}
+.marquee-track{display:inline-flex;animation:mq 30s linear infinite;white-space:nowrap}
+.marquee-track-rev{animation-direction:reverse;animation-duration:25s}
+.marquee-item{font-size:.7rem;font-weight:800;letter-spacing:.3em;text-transform:uppercase;padding:.9rem 2.5rem;color:rgba(255,255,255,.22)}
+
+/* ── CLIENT LOGOS ──────────────────────────────────────────────────── */
+#clients{background:var(--navy);padding:clamp(3rem,6vw,5rem) 0}
+.clients-label{text-align:center;margin-bottom:2.5rem}
+.clients-track-wrap{overflow:hidden;position:relative}
+.clients-track-wrap::before,.clients-track-wrap::after{content:'';position:absolute;top:0;bottom:0;width:120px;z-index:2;pointer-events:none}
+.clients-track-wrap::before{left:0;background:linear-gradient(to right,var(--navy),transparent)}
+.clients-track-wrap::after{right:0;background:linear-gradient(to left,var(--navy),transparent)}
+.clients-track{display:inline-flex;gap:1rem;animation:mq 36s linear infinite}
+.client-logo-card{
+  width:180px;height:80px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);
+  border-radius:var(--r);padding:1.25rem;
+  transition:all .3s;
+}
+.client-logo-card:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.18)}
+.client-logo-card span{font-size:.75rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.35);transition:color .3s}
+.client-logo-card:hover span{color:rgba(255,255,255,.8)}
+
+/* ── ABOUT ─────────────────────────────────────────────────────────── */
+#about{background:var(--navy)}
+.about-big-text{
+  font-size:clamp(1.8rem,4.5vw,4rem);font-weight:900;line-height:1;
+  letter-spacing:-.035em;color:#fff;max-width:1000px;margin-bottom:3rem;
+}
+.about-big-text em{color:var(--gold2);font-style:normal;font-weight:300}
+.about-body{font-size:clamp(.9rem,1.5vw,1.05rem);color:rgba(255,255,255,.5);line-height:1.8;max-width:520px}
+.about-link{display:inline-flex;align-items:center;gap:.75rem;color:var(--gold2);font-size:.88rem;font-weight:700;margin-top:2rem;transition:gap .2s}
+.about-link:hover{gap:1.1rem}
+.about-link-icon{width:40px;height:40px;border-radius:50%;border:1px solid rgba(200,145,42,.35);display:flex;align-items:center;justify-content:center;transition:all .25s}
+.about-link:hover .about-link-icon{background:var(--gold2);border-color:var(--gold2);color:var(--navy)}
+
+/* ── STATS ─────────────────────────────────────────────────────────── */
+#stats{background:var(--navy);border-top:1px solid rgba(255,255,255,.06)}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:rgba(255,255,255,.05)}
+.stat-card{background:var(--navy);padding:3rem 2rem;text-align:center}
+.stat-val{font-size:clamp(2.2rem,5vw,3.5rem);font-weight:900;color:#fff;letter-spacing:-.04em;line-height:1}
+.stat-lbl{font-size:.65rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-top:.65rem}
+
+/* ── WHY US ────────────────────────────────────────────────────────── */
+#whyus{background:var(--white)}
+.why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border2);border-radius:var(--r2);overflow:hidden;margin-top:3rem}
+.why-card{
+  background:var(--white);padding:2.5rem 2rem;
+  transition:background .25s;
+  position:relative;overflow:hidden;
+}
+.why-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform .3s}
+.why-card:hover{background:var(--off)}
+.why-card:hover::before{transform:scaleX(1)}
+.why-card.featured{background:var(--navy);grid-column:span 2}
+.why-card.featured:hover{background:var(--navy2)}
+.why-icon{width:48px;height:48px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:1.5rem}
+.why-icon.light{background:var(--off2);color:var(--navy)}
+.why-icon.dark{background:var(--gold);color:var(--navy)}
+.why-title{font-size:1.05rem;font-weight:800;letter-spacing:-.02em;margin-bottom:.6rem;color:var(--navy)}
+.why-card.featured .why-title{color:#fff}
+.why-desc{font-size:.84rem;color:var(--muted);line-height:1.65}
+.why-card.featured .why-desc{color:rgba(255,255,255,.55)}
+.why-badge{font-size:.6rem;font-weight:800;letter-spacing:.22em;text-transform:uppercase;color:var(--gold2);margin-bottom:.75rem;display:block}
+
+/* ── SERVICES ──────────────────────────────────────────────────────── */
+#services{background:var(--off)}
+.svc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:1.25rem;margin-top:3rem}
+.svc-card{
+  background:var(--white);border-radius:var(--r2);padding:2rem;
+  border:1px solid var(--border2);
+  transition:all .3s;position:relative;overflow:hidden;
+}
+.svc-card:hover{transform:translateY(-4px);box-shadow:0 20px 52px rgba(10,22,40,.1);border-color:rgba(15,35,71,.15)}
+.svc-card::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(to right,var(--gold),var(--gold2));transform:scaleX(0);transform-origin:left;transition:transform .35s}
+.svc-card:hover::after{transform:scaleX(1)}
+.svc-icon{font-size:1.8rem;margin-bottom:1.25rem}
+.svc-kw{display:inline-flex;align-items:center;padding:.25rem .8rem;background:var(--off2);border-radius:var(--r3);font-size:.66rem;font-weight:800;color:var(--navy3);letter-spacing:.06em;margin-bottom:1rem}
+.svc-title{font-size:1rem;font-weight:800;letter-spacing:-.02em;color:var(--navy);margin-bottom:.5rem}
+.svc-desc{font-size:.82rem;color:var(--muted);line-height:1.65;margin-bottom:1.5rem}
+.svc-btn{
+  width:100%;display:flex;align-items:center;justify-content:center;gap:.5rem;
+  background:var(--navy);color:#fff;
+  padding:.7rem 1rem;border-radius:var(--r3);
+  font-size:.78rem;font-weight:700;letter-spacing:.02em;
+  transition:all .2s;
+}
+.svc-btn:hover{background:var(--navy3)}
+
+/* ── PROJECTS ──────────────────────────────────────────────────────── */
+#projects{background:var(--white)}
+.proj-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:3rem;flex-wrap:wrap;gap:1rem}
+.see-all{display:inline-flex;align-items:center;gap:.5rem;font-size:.8rem;font-weight:700;color:var(--navy3);transition:gap .2s}
+.see-all:hover{gap:.85rem}
+.proj-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem}
+.proj-card{
+  border-radius:var(--r2);overflow:hidden;position:relative;
+  background:var(--navy);cursor:pointer;
+  transition:transform .35s cubic-bezier(.22,.7,.2,1);
+}
+.proj-card:hover{transform:translateY(-5px)}
+.proj-card-img{width:100%;aspect-ratio:16/10;object-fit:cover;opacity:.6;transition:opacity .5s,transform .7s}
+.proj-card:hover .proj-card-img{opacity:.8;transform:scale(1.04)}
+.proj-card-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to top,var(--navy) 0%,rgba(10,22,40,.5) 55%,transparent 100%);
+}
+.proj-card-body{position:absolute;bottom:0;left:0;right:0;padding:1.75rem}
+.proj-kw-badge{
+  display:inline-flex;align-items:center;gap:.35rem;
+  background:rgba(200,145,42,.9);color:var(--navy);
+  padding:.3rem .8rem;border-radius:var(--r3);
+  font-size:.65rem;font-weight:800;letter-spacing:.06em;
+  margin-bottom:.75rem;
+}
+.proj-card-title{font-size:1.3rem;font-weight:800;color:#fff;letter-spacing:-.02em;line-height:1.2;margin-bottom:.25rem}
+.proj-card-loc{font-size:.72rem;color:rgba(255,255,255,.45);font-weight:600}
+.proj-arrow{
+  position:absolute;top:1.25rem;right:1.25rem;
+  width:36px;height:36px;border-radius:50%;
+  background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);
+  display:flex;align-items:center;justify-content:center;
+  transition:all .3s;color:#fff;
+}
+.proj-card:hover .proj-arrow{background:var(--gold);border-color:var(--gold);color:var(--navy);transform:rotate(45deg)}
+
+/* ── COMPARE ───────────────────────────────────────────────────────── */
+#compare{background:var(--off)}
+.compare-wrap{max-width:820px;margin:3rem auto 0}
+.compare-table{border-radius:var(--r2);overflow:hidden;border:1px solid var(--border)}
+.compare-head{display:grid;grid-template-columns:1fr 1fr 1fr}
+.compare-head-feat{background:var(--off2);padding:1.1rem 1.5rem}
+.compare-head-us{background:var(--navy);padding:1.1rem 1.5rem;text-align:center}
+.compare-head-them{background:#f9fafc;padding:1.1rem 1.5rem;text-align:center;border-left:1px solid var(--border)}
+.compare-head-us-label{font-size:.78rem;font-weight:800;color:#fff;letter-spacing:.04em}
+.compare-head-them-label{font-size:.78rem;font-weight:600;color:#9aabbf}
+.compare-row{display:grid;grid-template-columns:1fr 1fr 1fr;border-top:1px solid var(--border2)}
+.compare-feat{padding:.95rem 1.5rem;font-size:.84rem;font-weight:600;color:#2a3d6b;display:flex;align-items:center}
+.compare-yes{display:flex;align-items:center;justify-content:center;padding:.95rem;border-left:2px solid var(--navy)}
+.compare-no{display:flex;align-items:center;justify-content:center;padding:.95rem;border-left:1px solid var(--border)}
+.compare-foot{background:var(--navy);padding:.95rem 1.5rem;text-align:center}
+.compare-foot a{font-size:.8rem;font-weight:700;color:var(--gold2)}
+
+/* ── REVIEWS ───────────────────────────────────────────────────────── */
+#reviews{background:var(--white)}
+.reviews-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.25rem;margin-top:3rem}
+.review-card{border-radius:var(--r2);overflow:hidden;border:1px solid var(--border2);transition:all .3s}
+.review-card:hover{box-shadow:0 16px 48px rgba(10,22,40,.09);border-color:var(--border)}
+.yt-area{
+  background:var(--navy);aspect-ratio:16/9;
+  display:flex;align-items:center;justify-content:center;flex-direction:column;gap:.6rem;
+  position:relative;cursor:pointer;overflow:hidden;
+}
+.yt-area::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(15,35,71,.9),rgba(26,58,110,.5));transition:opacity .3s}
+.yt-area:hover::before{opacity:.7}
+.yt-play{width:50px;height:50px;background:#ff0000;border-radius:50%;display:flex;align-items:center;justify-content:center;position:relative;z-index:1;transition:transform .25s}
+.yt-area:hover .yt-play{transform:scale(1.1)}
+.yt-reviewer{font-size:.7rem;color:rgba(255,255,255,.45);font-weight:600;position:relative;z-index:1}
+.yt-label{position:absolute;top:.65rem;right:.75rem;background:rgba(255,255,255,.1);border-radius:4px;padding:2px 7px;font-size:.6rem;color:rgba(255,255,255,.5);font-weight:700}
+.review-body{padding:1.4rem}
+.stars{display:flex;gap:2px;margin-bottom:.65rem}
+.star{color:#f59e0b;font-size:13px}
+.review-text{font-size:.83rem;color:var(--muted);line-height:1.7;margin-bottom:1rem}
+.reviewer-name{font-weight:800;font-size:.86rem;color:var(--navy)}
+.reviewer-role{font-size:.72rem;color:#7a95c2;margin-top:.2rem}
+
+/* ── FAQ ───────────────────────────────────────────────────────────── */
+#faq{background:var(--off)}
+.faq-wrap{max-width:720px;margin:3rem auto 0;display:flex;flex-direction:column;gap:.7rem}
+.faq-item{border:1px solid var(--border);border-radius:var(--r);overflow:hidden;transition:border-color .25s}
+.faq-item.open{border-color:var(--navy3)}
+.faq-btn{
+  width:100%;display:flex;justify-content:space-between;align-items:center;
+  padding:1.15rem 1.4rem;background:var(--white);cursor:pointer;
+  text-align:left;gap:1rem;transition:background .2s;border:none;
+}
+.faq-item.open .faq-btn{background:var(--off)}
+.faq-question{font-weight:700;font-size:.88rem;color:var(--navy);line-height:1.4}
+.faq-icon{font-size:1.1rem;color:#9aabbf;transition:transform .3s;display:inline-block;flex-shrink:0}
+.faq-item.open .faq-icon{transform:rotate(180deg);color:var(--navy3)}
+.faq-body{max-height:0;overflow:hidden;transition:max-height .35s ease}
+.faq-answer{padding:.25rem 1.4rem 1.15rem;font-size:.87rem;color:var(--muted);line-height:1.75}
+
+/* ── CONTACT ───────────────────────────────────────────────────────── */
+#contact{background:var(--navy);position:relative;overflow:hidden}
+.contact-bg-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.015) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.015) 1px,transparent 1px);background-size:60px 60px;pointer-events:none}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(3rem,6vw,6rem);align-items:start}
+.con-title{font-size:clamp(1.8rem,3.5vw,3rem);font-weight:900;letter-spacing:-.04em;color:#fff;margin-bottom:.75rem}
+.con-sub{font-size:.95rem;color:rgba(255,255,255,.45);line-height:1.75;max-width:440px}
+
+/* Form */
+.form-stack{display:flex;flex-direction:column;gap:.9rem;margin-top:2rem}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:.9rem}
+.form-field label{display:block;font-size:.65rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.38);margin-bottom:.45rem}
+.form-inp{
+  width:100%;background:rgba(255,255,255,.055);
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:10px;padding:.85rem 1rem;
+  color:#fff;font-size:.88rem;outline:none;
+  transition:border-color .2s,background .2s;
+}
+.form-inp::placeholder{color:rgba(255,255,255,.2)}
+.form-inp:focus{border-color:var(--gold);background:rgba(255,255,255,.08)}
+.form-inp option{background:#1a3a6e;color:#fff}
+.btn-submit{
+  width:100%;padding:1rem 2rem;border-radius:var(--r3);
+  background:var(--gold);color:var(--navy);
+  font-size:.92rem;font-weight:800;letter-spacing:.02em;
+  display:flex;align-items:center;justify-content:center;gap:.6rem;
+  transition:all .25s;box-shadow:0 8px 28px rgba(200,145,42,.3);
+  margin-top:.35rem;
+}
+.btn-submit:hover{background:var(--gold2);transform:translateY(-2px);box-shadow:0 12px 36px rgba(200,145,42,.4)}
+.btn-submit:disabled{opacity:.6;cursor:not-allowed;transform:none}
+.form-note{font-size:.68rem;color:rgba(255,255,255,.22);text-align:center;line-height:1.5}
+.form-success{text-align:center;padding:2.5rem 1.5rem}
+.form-success-icon{font-size:3rem;margin-bottom:1rem}
+.form-success-title{font-size:1.5rem;font-weight:800;color:#fff;margin-bottom:.75rem}
+.form-success-text{font-size:.9rem;color:rgba(255,255,255,.5);line-height:1.7}
+.form-error-msg{
+  background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.3);
+  border-radius:8px;padding:.75rem 1rem;
+  font-size:.8rem;color:#fca5a5;display:flex;align-items:center;gap:.6rem;
+}
+.spinner{width:16px;height:16px;border:2px solid rgba(10,22,40,.3);border-top-color:var(--navy);border-radius:50%;animation:spin .7s linear infinite;flex-shrink:0}
+
+/* Contact info */
+.con-info{display:flex;flex-direction:column;gap:1.5rem;margin-top:2rem}
+.con-info-item{
+  display:flex;align-items:center;gap:1rem;
+  color:rgba(255,255,255,.65);font-size:.9rem;font-weight:500;
+  transition:color .2s;
+}
+.con-info-item:hover{color:#fff}
+.con-info-icon{
+  width:44px;height:44px;flex-shrink:0;border-radius:10px;
+  background:rgba(200,145,42,.18);
+  display:flex;align-items:center;justify-content:center;font-size:1.1rem;
+}
+.map-embed{
+  margin-top:.5rem;border-radius:14px;overflow:hidden;
+  border:1px solid rgba(255,255,255,.08);aspect-ratio:16/7;
+  background:rgba(255,255,255,.04);
+  display:flex;align-items:center;justify-content:center;flex-direction:column;gap:.5rem;
+}
+.map-embed a{font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold2)}
+.socials-label{font-size:.62rem;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-top.5rem;}
+.socials{display:flex;gap:.6rem;margin-top:.75rem}
+.social-btn{
+  width:44px;height:44px;border-radius:10px;
+  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1rem;transition:all .2s;
+}
+.social-btn:hover{background:rgba(200,145,42,.2);border-color:var(--gold)}
+
+/* ── MODAL ─────────────────────────────────────────────────────────── */
+.modal-ov{
+  position:fixed;inset:0;background:rgba(5,12,28,.75);
+  z-index:800;display:flex;align-items:center;justify-content:center;
+  padding:1rem;opacity:0;pointer-events:none;transition:opacity .3s;
+  backdrop-filter:blur(8px);
+}
+.modal-ov.show{opacity:1;pointer-events:all}
+.modal{
+  background:#fff;border-radius:var(--r2);width:100%;max-width:520px;
+  max-height:90vh;overflow-y:auto;position:relative;
+  animation:fadeUp .3s ease;
+}
+.modal-head{padding:1.75rem 2rem 1.25rem;border-bottom:1px solid var(--border2)}
+.modal-svc-tag{
+  display:inline-flex;align-items:center;gap:.4rem;
+  background:var(--off2);border-radius:var(--r3);
+  padding:.3rem .85rem;font-size:.66rem;font-weight:800;
+  color:var(--navy3);letter-spacing:.06em;margin-bottom:.75rem;
+}
+.modal-title{font-size:1.35rem;font-weight:800;color:var(--navy);letter-spacing:-.025em;margin-bottom:.3rem}
+.modal-sub{font-size:.82rem;color:var(--muted);line-height:1.6}
+.modal-body{padding:1.4rem 2rem 2rem}
+.modal-form{display:flex;flex-direction:column;gap:.85rem}
+.modal-label{display:block;font-size:.64rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:.4rem}
+.modal-inp{
+  width:100%;background:var(--off);border:1px solid var(--border);
+  border-radius:9px;padding:.82rem 1rem;
+  color:var(--navy);font-size:.88rem;outline:none;
+  transition:border-color .2s,background .2s;
+}
+.modal-inp::placeholder{color:#b0bdd4}
+.modal-inp:focus{border-color:var(--navy3);background:#fff}
+.modal-row{display:grid;grid-template-columns:1fr 1fr;gap:.85rem}
+.modal-btn{
+  background:var(--navy);color:#fff;
+  padding:1rem 2rem;border-radius:var(--r3);
+  font-size:.9rem;font-weight:800;
+  display:flex;align-items:center;justify-content:center;gap:.6rem;
+  transition:all .2s;margin-top:.4rem;
+  box-shadow:0 6px 24px rgba(10,22,40,.2);
+}
+.modal-btn:hover:not(:disabled){background:var(--navy3)}
+.modal-btn:disabled{opacity:.55;cursor:not-allowed}
+.modal-close{
+  position:absolute;top:1.1rem;right:1.1rem;
+  width:34px;height:34px;border-radius:50%;
+  border:1px solid var(--border);background:#fff;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1rem;color:var(--muted);cursor:pointer;transition:all .2s;
+}
+.modal-close:hover{background:var(--off);color:var(--navy)}
+.modal-note{font-size:.68rem;color:#b0bdd4;text-align:center;margin-top:.65rem;line-height:1.5}
+
+/* ── FOOTER ────────────────────────────────────────────────────────── */
+footer{background:#040d1c;padding:clamp(3rem,6vw,5rem) 0 1.75rem}
+.footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:clamp(2rem,4vw,4rem);margin-bottom:3rem}
+.footer-brand-name{font-size:1.05rem;font-weight:900;color:#fff;letter-spacing:-.03em;margin-bottom:.75rem}
+.footer-brand-desc{font-size:.8rem;color:rgba(255,255,255,.35);line-height:1.7;margin-bottom:1rem}
+.footer-slogan{font-size:.6rem;font-weight:800;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.2)}
+.footer-col-title{font-size:.6rem;font-weight:800;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:1.25rem}
+.footer-link{display:block;font-size:.8rem;color:rgba(255,255,255,.45);margin-bottom:.65rem;transition:color .2s}
+.footer-link:hover{color:rgba(255,255,255,.9)}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.06);padding-top:1.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.75rem}
+.footer-copy{font-size:.7rem;color:rgba(255,255,255,.2)}
+.footer-quality{font-size:.65rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.15)}
+
+/* ── SECTION HEADERS ───────────────────────────────────────────────── */
+.section-header{margin-bottom:clamp(2.5rem,5vw,4rem)}
+.section-header-row{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:1rem}
+.tag-line{color:var(--navy3)}
+.tag-line-light{color:rgba(255,255,255,.35)}
+
+/* ── UTILITY ───────────────────────────────────────────────────────── */
+.icon-arrow{display:inline-block;font-style:normal}
+.gold{color:var(--gold2)}
+.hidden{display:none!important}
+
+/* ── RESPONSIVE ────────────────────────────────────────────────────── */
+@media(max-width:900px){
+  .nav-links-wrap{display:none}
+  .stats-grid{grid-template-columns:repeat(2,1fr)}
+  .why-grid{grid-template-columns:1fr;border-radius:var(--r)}
+  .why-card.featured{grid-column:span 1}
+  .proj-grid{grid-template-columns:1fr}
+  .contact-grid{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr 1fr}
+  .compare-head,.compare-row{font-size:.78rem}
+}
+@media(max-width:600px){
+  .form-row,.modal-row{grid-template-columns:1fr}
+  .hero-btns{flex-direction:column;align-items:center}
+  .footer-grid{grid-template-columns:1fr}
+  .reviews-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════════════════════
+     MODAL
+══════════════════════════════════════════════════════════════════ -->
+<div class="modal-ov" id="modal-overlay" onclick="closeModal(event)">
+  <div class="modal" id="modal-box">
+    <button class="modal-close" onclick="closeModalDir()" aria-label="Yopish">✕</button>
+    <div class="modal-head">
+      <div class="modal-svc-tag" id="m-tag">⚡ Generator</div>
+      <h3 class="modal-title" id="m-title">Ariza qoldirish</h3>
+      <p class="modal-sub" id="m-sub">Mutaxassisimiz 30 daqiqa ichida siz bilan bog'lanadi.</p>
+    </div>
+    <div class="modal-body">
+      <div id="modal-form-wrap">
+        <div class="modal-form" id="modal-form">
+          <div class="modal-row">
+            <div>
+              <label class="modal-label" id="ml-name">Ismingiz</label>
+              <input class="modal-inp" id="mf-name" type="text" required>
+            </div>
+            <div>
+              <label class="modal-label" id="ml-phone">Telefon</label>
+              <input class="modal-inp" id="mf-phone" type="tel" required>
+            </div>
+          </div>
+          <div class="modal-row">
+            <div>
+              <label class="modal-label" id="ml-company">Kompaniya</label>
+              <input class="modal-inp" id="mf-company" type="text">
+            </div>
+            <div>
+              <label class="modal-label" id="ml-role">Lavozim</label>
+              <input class="modal-inp" id="mf-role" type="text">
+            </div>
+          </div>
+          <div>
+            <label class="modal-label" id="ml-region">Viloyat</label>
+            <select class="modal-inp" id="mf-region"></select>
+          </div>
+          <div>
+            <label class="modal-label" id="ml-power">Kerakli quvvat</label>
+            <select class="modal-inp" id="mf-power"></select>
+          </div>
+          <div>
+            <label class="modal-label" id="ml-source">Qayerdan bildingiz?</label>
+            <select class="modal-inp" id="mf-source"></select>
+          </div>
+          <input type="hidden" id="mf-service">
+          <div id="modal-error" class="form-error-msg hidden">
+            <span>⚠️</span><span id="modal-error-txt"></span>
+          </div>
+          <button class="modal-btn" id="modal-submit-btn" onclick="submitModal()">
+            <span id="modal-submit-txt">Ariza yuborish</span>
+          </button>
+          <p class="modal-note" id="modal-note-txt"></p>
+        </div>
+        <div id="modal-success" class="form-success hidden">
+          <div class="form-success-icon">✅</div>
+          <div class="form-success-title" id="modal-ok-title">Rahmat!</div>
+          <p class="form-success-text" id="modal-ok-text">So'rovingiz qabul qilindi. Tez orada siz bilan bog'lanamiz.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════
+     NAVBAR
+══════════════════════════════════════════════════════════════════ -->
+<nav id="navbar">
+  <a href="#" class="nav-logo">ELEGAN</a>
+  <div class="nav-links-wrap">
+    <a href="#about" class="nav-link" id="nl-about">Biz haqimizda</a>
+    <a href="#services" class="nav-link" id="nl-services">Xizmatlar</a>
+    <a href="#projects" class="nav-link" id="nl-projects">Loyihalar</a>
+    <a href="#compare" class="nav-link" id="nl-compare">Nima uchun biz?</a>
+    <a href="#reviews" class="nav-link" id="nl-reviews">Mijozlar</a>
+    <a href="#faq" class="nav-link" id="nl-faq">FAQ</a>
+  </div>
+  <div style="display:flex;align-items:center;gap:.75rem">
+    <div class="lang-sw">
+      <button class="lb active" onclick="setLang('uz')">UZ</button>
+      <button class="lb" onclick="setLang('ru')">RU</button>
+      <button class="lb" onclick="setLang('en')">EN</button>
+    </div>
+    <a href="#contact" class="nav-cta-btn" id="nl-cta">Ariza qoldirish</a>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════════════════════════════════════
+     1. HERO
+══════════════════════════════════════════════════════════════════ -->
+<section id="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+
+  <div class="hero-badge">
+    <div class="hero-badge-dot"></div>
+    <span class="hero-badge-text" id="hero-badge">2010-yildan beri ishonchli hamkor</span>
+  </div>
+
+  <h1 class="display hero-h1" id="hero-title" style="color:#fff;max-width:960px">
+    <em>Sanoat</em> uchun<br>
+    <span style="font-weight:300;opacity:.85">uzluksiz energiya</span>
+  </h1>
+
+  <p class="hero-sub" id="hero-sub">
+    16 kW dan 2000 kW gacha dizel generatorlar. To'g'ridan-to'g'ri ishlab chiqaruvchidan — kafolat, yetkazib berish, o'rnatish va servis.
+  </p>
+
+  <div class="hero-btns">
+    <button class="btn-gold" onclick="openModal('general')">
+      <span id="hero-cta">Ariza qoldirish</span>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7,7 17,7 17,17"/></svg>
+    </button>
+    <a href="#projects" class="btn-outline-light">
+      <span id="hero-cta2">Loyihalar</span>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg>
+    </a>
+  </div>
+
+  <div class="hero-stats">
+    <div style="text-align:center"><div class="hero-stat-num">500+</div><div class="hero-stat-lbl" id="hs-0">Loyiha</div></div>
+    <div style="text-align:center"><div class="hero-stat-num">16</div><div class="hero-stat-lbl" id="hs-1">Yil tajriba</div></div>
+    <div style="text-align:center"><div class="hero-stat-num">2000</div><div class="hero-stat-lbl" id="hs-2">kW gacha</div></div>
+    <div style="text-align:center"><div class="hero-stat-num">24/7</div><div class="hero-stat-lbl" id="hs-3">Texnik yordam</div></div>
+  </div>
+
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <div class="hero-scroll-line"></div>
+  </div>
+
+  <!-- marquee -->
+  <div class="marquee-section" style="position:absolute;bottom:0;left:0;right:0">
+    <div style="padding:.8rem 0;overflow:hidden">
+      <div class="marquee-track">
+        <span class="marquee-item" id="mq1-txt">Diesel Generators • 16 kW – 2000 kW • A dan Z gacha xizmat • 2 yil bepul servis •</span>
+        <span class="marquee-item" id="mq1-txt2">Diesel Generators • 16 kW – 2000 kW • A dan Z gacha xizmat • 2 yil bepul servis •</span>
+        <span class="marquee-item">Diesel Generators • 16 kW – 2000 kW • A dan Z gacha xizmat • 2 yil bepul servis •</span>
+        <span class="marquee-item">Diesel Generators • 16 kW – 2000 kW • A dan Z gacha xizmat • 2 yil bepul servis •</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════
+     2. CLIENTS
+══════════════════════════════════════════════════════════════════ -->
+<section id="clients">
+  <div class="clients-label">
+    <p class="tag tag-line-light" id="clients-label">Bizga ishonch bildirgan kompaniyalar</p>
+  </div>
+  <div class="clients-track-wrap">
+    <div class="clients-track" id="clients-track"></div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════
+     3. ABOUT
+══════════════════════════════════════════════════════════════════ -->
+<section id="about" class="section">
+  <div class="wrap">
+    <div class="anim-up">
+      <p class="tag tag-line-light" id="about-tag" style="margin-bottom:1.5rem">— Biz haqimizda</p>
+    </div>
+    <div class="anim-up d1">
+      <h2 class="about-big-text" id="about-title">
+        <em>Elegan Generator</em> — O'zbekiston bozorida
+        <span style="font-weight:300;opacity:.7">16 yillik tajribaga ega</span>
+        sanoat dizel generatorlari yetkazib beruvchisi.
+      </h2>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-start;gap:1.5rem" class="anim-up d2">
+      <p class="about-body" id="about-text">
+        Xitoydagi o'z ishlab chiqarish bazamiz orqali "Elegan" brendi ostida generatorlarni to'g'ridan-to'g'ri yetkazib beramiz. Olib sotuvchi emasmiz — ishonch, sifat va texnik yordam bizning standartimiz.
+      </p>
+      <a href="#" class="about-link" id="about-link">
+        <span id="about-link-txt">Batafsil ma'lumot</span>
+        <span class="about-link-icon">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7,7 17,7 17,17"/></svg>
+        </span>
+      </a>
+    </div>
+
+    <!-- Big marquee text -->
+    <div style="overflow:hidden;margin-top:5rem;opacity:.04" class="anim-up d3">
+      <div class="marquee-track" style="animation-duration:20s">
+        <span style="font-size:clamp(3rem,12vw,9rem);font-weight:900;letter-spacing:-.05em;color:#fff;white-space:nowrap;padding-right:3rem">ELEGAN GENERATOR •</span>
+        <span style="font-size:clamp(3rem,12vw,9rem);font-weight:900;letter-spacing:-.05em;color:#fff;white-space:nowrap;padding-right:3rem">ELEGAN GENERATOR •</span>
+        <span style="font-size:clamp(3rem,12vw,9rem);font-weight:900;letter-spacing:-.05em;color:#fff;white-space:nowrap;padding-right:3rem">ELEGAN GENERATOR •</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════
+     4. STATS
+══════════════════════════════════════════════════════════════════ -->
+<section id="stats">
+  <div class="stats-grid">
+    <div class="stat-card anim-up"><div class="stat-val">2010</div><div class="stat-lbl" id="stat-0">Yildan beri faoliyat</div></div>
+    <div class="stat-card anim-up d1"><div class="stat-val">1000+</div><div class="stat-lbl" id="stat-1">Ishonchli mijoz</div></div>
+    <div class="stat-card anim-up d2"><div class="stat-val">16+</div><div class="stat-lbl" id="stat-2">Yillik tajriba</div></div>
+    <div class="stat-card anim-up d3"><div class="stat-val">24/7</div><div class="stat-lbl" id="stat-3">Texnik qo'llab-quvvatlash</div></div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════
+     5. WHY US
+══════════════════════════════════════════════════════════════════ -->
+<section id="whyus" class="section">
+  <div class="wrap">
+    <div class="section-header anim-up">
+      <p class="tag tag-line" id="why-tag" style="margin-bottom:.85rem">— Afzalliklarimiz</p>
+      <h2 class="h2" id="why-title">Nima uchun<br><span style="font-weight:300;color:var(--muted)">aynan biz?</span></h2>
+    </div>
+    <div class="why-grid" id="why-grid"></div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════
+     6. SERVICES
+══════════════════════════════════════════════════════════════════ -->
+<section id="services" class="section">
+  <div class="wrap">
+    <div class="section-header-row anim-up">
+      <div>
+        <p class="tag tag-line" id="svc-tag" style="margin-bottom:.85rem">— Xizmatlar</p>
+        <h2 class="h2" id="svc-title">Generatorlar <span style="font-weight:300;color:var(--muted)">va xizmatlar</span></h2>
+      </div>
+    </div>
+    <div class="svc-grid" id="svc-grid"></div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════
+     7. PROJECTS
+══════════════════════════════════════════════════════════════════ -->
+<section id="projects" class="section">
+  <div class="wrap">
+    <div class="proj-header anim-up">
+      <div>
+        <p class="tag tag-line" id="proj-tag" style="margin-bottom:.85rem">— Loyihalar</p>
+        <h2 class="h2" id="proj-title">Ishonch <span style="font-weight:300;color:var(--muted)">bildirgan</span><br>kompaniyalar</h2>
+      </div>
+      <a href="#" class="see-all" id="proj-all">
+        Barcha loyihalar
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7,7 17,7 17,17"/></svg>
+      </a>
+    </div>
+    <div class="proj-grid" id="proj-grid"></div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════
+     8. COMPARE
+══════════════════════════════════════════════════════════════════ -->
+<section id="compare" class="section">
+  <div class="wrap">
+    <div style="text-align:center" class="section-header anim-up">
+      <p class="tag tag-line" id="cmp-tag" style="margin-bottom:.85rem">— Nima uchun biz?</p>
+      <h2 class="h2" id="cmp-title">Boshqalardan <span style="font-weight:300;color:var(--muted)">farqimiz</span></h2>
+    </div>
+    <div class="compare-wrap">
+      <div class="compare-table">
+        <div class="compare-head">
+          <div class="compare-head-feat"></div>
+          <div class="compare-head-us"><span class="compare-head-us-label" id="cmp-us">Elegan Generator</span></div>
+          <div class="compare-head-them"><span class="compare-head-them-label" id="cmp-them">Boshqalar</span></div>
+        </div>
+        <div id="cmp-rows"></div>
+        <div class="compare-foot"><a href="#contact" id="cmp-cta" onclick="openModal('general');return false">Ariza qoldirish →</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════
+     9. REVIEWS
+══════════════════════════════════════════════════════════════════ -->
+<section id="reviews" class="section">
+  <div class="wrap">
+    <div class="section-header anim-up">
+      <p class="tag tag-line" id="rev-tag" style="margin-bottom:.85rem">— Mijozlar fikri</p>
+      <h2 class="h2" id="rev-title">Biz haqimizda <span style="font-weight:300;color:var(--muted)">aytishadi</span></h2>
+    </div>
+    <div class="reviews-grid" id="reviews-grid"></div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════
+     10. FAQ
+══════════════════════════════════════════════════════════════════ -->
+<section id="faq" class="section">
+  <div class="wrap">
+    <div style="text-align:center" class="section-header anim-up">
+      <p class="tag tag-line" id="faq-tag" style="margin-bottom:.85rem">— Savol-javob</p>
+      <h2 class="h2" id="faq-title">Tez-tez so'raladigan <span style="font-weight:300;color:var(--muted)">savollar</span></h2>
+    </div>
+    <div class="faq-wrap" id="faq-list"></div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════
+     11. CONTACT
+══════════════════════════════════════════════════════════════════ -->
+<section id="contact" class="section">
+  <div class="contact-bg-grid"></div>
+  <div class="wrap" style="position:relative">
+    <div class="anim-up" style="margin-bottom:3rem">
+      <p class="tag" style="color:rgba(200,145,42,.7);margin-bottom:.85rem" id="con-tag">— Bog'lanish</p>
+      <h2 class="con-title" id="con-title">Ariza qoldiring</h2>
+      <p class="con-sub" id="con-sub">Biznesingiz uchun eng mos generatorni tanlashda bepul texnik maslahat oling.</p>
+    </div>
+
+    <div class="contact-grid anim-up d1">
+      <!-- FORM -->
+      <div>
+        <div id="contact-form-wrap">
+          <div class="form-stack" id="contact-form">
+            <div class="form-row">
+              <div class="form-field">
+                <label id="lbl-name">Ismingiz</label>
+                <input class="form-inp" id="f-name" type="text" required placeholder="Jasur Toshmatov">
+              </div>
+              <div class="form-field">
+                <label id="lbl-phone">Telefon</label>
+                <input class="form-inp" id="f-phone" type="tel" required placeholder="+998 90 000 00 00">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-field">
+                <label id="lbl-company">Kompaniya</label>
+                <input class="form-inp" id="f-company" type="text">
+              </div>
+              <div class="form-field">
+                <label id="lbl-role">Lavozim</label>
+                <input class="form-inp" id="f-role" type="text">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-field">
+                <label id="lbl-service">Xizmat turi</label>
+                <select class="form-inp" id="f-service"></select>
+              </div>
+              <div class="form-field">
+                <label id="lbl-power">Kerakli quvvat</label>
+                <select class="form-inp" id="f-power"></select>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-field">
+                <label id="lbl-region">Viloyat</label>
+                <select class="form-inp" id="f-region"></select>
+              </div>
+              <div class="form-field">
+                <label id="lbl-source">Qayerdan bildingiz?</label>
+                <select class="form-inp" id="f-source"></select>
+              </div>
+            </div>
+            <div class="form-field">
+              <label id="lbl-msg">Xabar (ixtiyoriy)</label>
+              <textarea class="form-inp" id="f-msg" rows="3" style="resize:none"></textarea>
+            </div>
+            <div id="contact-error" class="form-error-msg hidden">
+              <span>⚠️</span><span id="contact-error-txt"></span>
+            </div>
+            <button class="btn-submit" id="contact-submit-btn" onclick="handleContactSend()">
+              <span id="contact-submit-txt">Yuborish</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22,2 15,22 11,13 2,9"/></svg>
+            </button>
+            <p class="form-note" id="con-note">Yuborish tugmasini bosib, shaxsiy ma'lumotlarni qayta ishlashga rozilik bildirasiz</p>
+          </div>
+          <div id="contact-success" class="form-success hidden">
+            <div class="form-success-icon">✅</div>
+            <div class="form-success-title" id="con-ok-title" style="color:#fff">Rahmat!</div>
+            <p class="form-success-text" id="con-ok-text">So'rovingiz qabul qilindi. Tez orada siz bilan bog'lanamiz.</p>
+            <button onclick="resetContactForm()" style="margin-top:1.5rem;padding:.65rem 1.5rem;background:var(--gold);color:var(--navy);border-radius:var(--r3);font-weight:700;font-size:.82rem" id="con-back-btn">← Orqaga</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- INFO -->
+      <div>
+        <p style="font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:1.25rem" id="con-or">yoki bevosita bog'laning</p>
+        <div class="con-info">
+          <a href="tel:+998332050000" class="con-info-item"><span class="con-info-icon">📞</span>+998 33 205 00 00</a>
+          <a href="tel:+998951541515" class="con-info-item"><span class="con-info-icon">📞</span>+998 95 154 15 15</a>
+          <a href="tel:+998953311515" class="con-info-item"><span class="con-info-icon">📞</span>+998 95 331 15 15</a>
+          <a href="https://wa.me/998958000607" target="_blank" class="con-info-item"><span class="con-info-icon">💬</span>WhatsApp</a>
+          <div class="con-info-item"><span class="con-info-icon">📍</span><span id="con-addr">Toshkent shahri, ombor va xizmat markazi</span></div>
+          <div class="con-info-item"><span class="con-info-icon">🕐</span><span id="con-hours">Dush – Shan: 09:00 – 18:00</span></div>
+        </div>
+        <div class="map-embed" style="margin-top:1.5rem">
+          <span style="font-size:1.8rem">🗺️</span>
+          <p style="font-size:.72rem;color:rgba(255,255,255,.25);font-weight:600">Google Maps</p>
+          <a href="https://www.google.com/maps?q=41.229700,69.151580" target="_blank" id="map-link">Yo'nalish olish →</a>
+        </div>
+        <div style="margin-top:1.5rem">
+          <p class="socials-label" id="con-follow" style="font-size:.62rem;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.25);">Ijtimoiy tarmoqlar</p>
+          <div class="socials">
+            <a href="https://instagram.com" target="_blank" class="social-btn" title="Instagram">📸</a>
+            <a href="https://youtube.com" target="_blank" class="social-btn" title="YouTube">▶️</a>
+            <a href="https://t.me/elegan_generator" target="_blank" class="social-btn" title="Telegram">✈️</a>
+            <a href="https://facebook.com" target="_blank" class="social-btn" title="Facebook">💬</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════
+     FOOTER
+══════════════════════════════════════════════════════════════════ -->
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand-name">ELEGAN Generator</div>
+        <p class="footer-brand-desc" id="f-desc">O'zbekistonda 1-qo'l generatorlar ta'minotchisi. 2010-yildan beri 1000+ mijozga ishonchli xizmat ko'rsatib kelmoqdamiz.</p>
+        <span class="footer-slogan" id="f-slogan">A dan Z gacha xizmat</span>
+      </div>
+      <div>
+        <div class="footer-col-title" id="f-pages-title">Sahifalar</div>
+        <a href="#" class="footer-link" id="f-p1">Bosh sahifa</a>
+        <a href="#services" class="footer-link" id="f-p2">Xizmatlar</a>
+        <a href="#projects" class="footer-link" id="f-p3">Loyihalar</a>
+        <a href="#about" class="footer-link" id="f-p4">Biz haqimizda</a>
+        <a href="#contact" class="footer-link" id="f-p5">Kontakt</a>
+      </div>
+      <div>
+        <div class="footer-col-title" id="f-con-title">Bog'lanish</div>
+        <a href="tel:+998332050000" class="footer-link">+998 33 205 00 00</a>
+        <a href="tel:+998951541515" class="footer-link">+998 95 154 15 15</a>
+        <a href="tel:+998953311515" class="footer-link">+998 95 331 15 15</a>
+        <a href="https://wa.me/998958000607" target="_blank" class="footer-link">WhatsApp</a>
+      </div>
+      <div>
+        <div class="footer-col-title" id="f-addr-title">Manzil</div>
+        <p class="footer-link" id="f-addr">Toshkent shahri, ombor va xizmat markazi</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2010–2026 Elegan Generator. <span id="f-copy">Barcha huquqlar himoyalangan.</span></span>
+      <span class="footer-quality" id="f-quality">Sifat · Ishonch · Tajriba</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ══════════════════════════════════════════════════════════════════
+     JAVASCRIPT
+══════════════════════════════════════════════════════════════════ -->
+<script>
+// ─── TELEGRAM CONFIG ──────────────────────────────────────────────
+// Bu yerga o'z tokeningizni kiriting!
+const BOT_TOKEN = "";  // misol: "7123456789:AAHxxxxxxxxxxxxxxxx"
+const CHAT_ID   = "";  // misol: "123456789" yoki "-100123456789"
+// ─────────────────────────────────────────────────────────────────
+
+// ─── TRANSLATIONS ─────────────────────────────────────────────────
+const T = {
+uz:{
+  hero:{badge:"2010-yildan beri ishonchli hamkor",t1:"Sanoat",t1b:"uchun",t2:"uzluksiz energiya",sub:"16 kW dan 2000 kW gacha dizel generatorlar. To'g'ridan-to'g'ri ishlab chiqaruvchidan — kafolat, yetkazib berish, o'rnatish va servis.",cta:"Ariza qoldirish",cta2:"Loyihalar",mq:"Diesel Generators • 16 kW – 2000 kW • A dan Z gacha xizmat • 2 yil bepul servis •"},
+  nav:{about:"Biz haqimizda",services:"Xizmatlar",projects:"Loyihalar",compare:"Nima uchun biz?",reviews:"Mijozlar",faq:"FAQ",cta:"Ariza qoldirish"},
+  stats:["Yildan beri faoliyat","Ishonchli mijoz","Yillik tajriba","Texnik qo'llab-quvvatlash"],
+  heroStats:["Loyiha","Yil tajriba","kW gacha","Texnik yordam"],
+  clients:"Bizga ishonch bildirgan kompaniyalar",
+  about:{tag:"Biz haqimizda",title:'<em>Elegan Generator</em> — O\'zbekiston bozorida <span style="font-weight:300;opacity:.7">16 yillik tajribaga ega</span> sanoat dizel generatorlari yetkazib beruvchisi.',text:'Xitoydagi o\'z ishlab chiqarish bazamiz orqali "Elegan" brendi ostida generatorlarni to\'g\'ridan-to\'g\'ri yetkazib beramiz. Olib sotuvchi emasmiz — ishonch, sifat va texnik yordam bizning standartimiz.',link:"Batafsil ma'lumot"},
+  whyUs:{tag:"Afzalliklarimiz",title:'Nima uchun<br><span style="font-weight:300;color:var(--muted)">aynan biz?</span>',badge:"Bizning farqimiz",
+    items:[
+      {icon:"🏭",title:"Xitoydan birinchi qo'l",desc:"O'z brendimiz ostida ishlab chiqaramiz — olib sotuvchi emasmiz.",featured:true},
+      {icon:"🛡️",title:"1 yillik kafolat",desc:"Barcha generatorlarga rasmiy zavod kafolati."},
+      {icon:"🔧",title:"A dan Z gacha xizmat",desc:"Tanlash, yetkazish, o'rnatish va servis."},
+      {icon:"🚚",title:"Tez yetkazib berish",desc:"Toshkent va viloyatlarga operativ logistika."},
+      {icon:"⏰",title:"2 yil bepul qo'llab-quvvatlash",desc:"Mahalliy texnik yordam — 24/7."},
+    ]},
+  services:{tag:"Xizmatlar",title:'Generatorlar <span style="font-weight:300;color:var(--muted)">va xizmatlar</span>',btn:"Ariza qoldirish",
+    items:[
+      {icon:"⚡",kw:"16–50 kW",title:"16–50 kW Generatorlar",desc:"Kafe, ofis, do'kon va kichik ishlab chiqarish uchun ideal. Ixcham, tejamkor, ishonchli.",service:"16-50 kW generator"},
+      {icon:"🏭",kw:"50–200 kW",title:"50–200 kW Generatorlar",desc:"O'rta hajmli zavodlar, savdo markazlari va mehmonxonalar uchun. Yuqori unumdorlik.",service:"50-200 kW generator"},
+      {icon:"🔋",kw:"200–500 kW",title:"200–500 kW Generatorlar",desc:"Yirik sanoat korxonalari va logistika markazlari uchun. Uzluksiz ishlash kafolati.",service:"200-500 kW generator"},
+      {icon:"🚀",kw:"500–2000 kW",title:"500–2000 kW Generatorlar",desc:"Mega loyihalar, sanoat gigantlari. Maxsus loyihalash va texnik maslahat.",service:"500-2000 kW generator"},
+      {icon:"🔧",kw:"Turnkey",title:"O'rnatish va sozlash",desc:"Professionallar tomonidan o'rnatish, elektr ulash, sinov va ishga tushirish.",service:"O'rnatish xizmati"},
+      {icon:"🛡️",kw:"24/7",title:"Texnik servis",desc:"Muntazam texnik ko'rik, tez yordamchi brigada, zapchast ta'minoti 24/7.",service:"Texnik servis"},
+    ]},
+  projects:{tag:"Loyihalar",title:'Ishonch <span style="font-weight:300;color:var(--muted)">bildirgan</span><br>kompaniyalar',all:"Barcha loyihalar",
+    items:[
+      {title:"IT Park Toshkent",loc:"Toshkent",power:"2 × 640 kW",total:"1280 kW",desc:"IT Park kampusining uzluksiz energiya ta'minoti uchun ikki dona 640 kW quvvatli generator o'rnatildi."},
+      {title:"UET & KOC Construction",loc:"Toshkent",power:"Ko'p yillik hamkorlik",total:"Strategik mijoz",desc:"Qurilish maydonchalari uchun turli quvvatdagi generatorlar yetkazib berildi va texnik xizmat ko'rsatilmoqda."},
+      {title:"Xorazm Tuz Zavodi",loc:"Xorazm",power:"500 kW",total:"500 kW",desc:"Tuz ishlab chiqarish liniyalarini uzluksiz energiya bilan ta'minlash uchun 500 kW dizel generator o'rnatildi."},
+      {title:"Oxangaron Beton Zavodi",loc:"Toshkent viloyati",power:"200 kW",total:"200 kW",desc:"Beton aralashtirish kompleksi uchun 200 kW quvvatli avtomatik ishga tushuvchi generator yetkazib berildi."},
+    ]},
+  compare:{tag:"Nima uchun biz?",title:'Boshqalardan <span style="font-weight:300;color:var(--muted)">farqimiz</span>',us:"Elegan Generator",them:"Boshqalar",cta:"Ariza qoldirish →",
+    feats:["To'g'ridan-to'g'ri ishlab chiqaruvchi","1 yillik rasmiy kafolat","2 yil bepul texnik xizmat","O'rnatish va sozlash xizmati","24/7 qo'llab-quvvatlash","Butun O'zbekistonga yetkazish","Shaxsiy texnik maslahat","Zapchast ta'minoti"]},
+  reviews:{tag:"Mijozlar fikri",title:'Biz haqimizda <span style="font-weight:300;color:var(--muted)">aytishadi</span>',
+    items:[
+      {n:"Jasur Toshmatov",r:"IT Park — Texnik direktor",t:"Elegan jamoasi bilan ishlash juda qulay. O'rnatishdan tortib servisgacha hamma narsa vaqtida va sifatli."},
+      {n:"Dilnoza Yusupova",r:"Masa & Casa — Egasi",t:"Generator ishga tushgandan beri hech qanday muammo bo'lmadi. Kafolat va texnik yordam zo'r darajada."},
+      {n:"Bobur Rahimov",r:"Xorazm Tuz Zavodi — Direktor",t:"500 kW lik generator 2 yildan beri uzluksiz ishlaydi. Texnik guruh har doim aloqada."},
+      {n:"Sarvar Mirzayev",r:"Oxangaron Beton — Muhandis",t:"Narxi ham qulay, sifati ham yuqori. Boshqa joylarga qaraganda ancha tejamkor chiqdi."},
+      {n:"Aziza Karimova",r:"Mega Mall — FM direktor",t:"Savdo markazimiz uchun 3 ta generator o'rnatildi. Hamma narsa professional darajada bajarildi."},
+    ]},
+  faq:{tag:"Savol-javob",title:'Tez-tez so\'raladigan <span style="font-weight:300;color:var(--muted)">savollar</span>',
+    items:[
+      {q:"Generatorlar qayerda ishlab chiqariladi?",a:"Barcha generatorlarimiz Xitoyda o'z ishlab chiqarish bazamizda 'Elegan' brendi ostida ishlab chiqariladi. Biz olib sotuvchi emasmiz."},
+      {q:"Kafolat muddati qancha?",a:"Barcha generatorlarimizga 1 yillik rasmiy zavod kafolati beriladi va 2 yil davomida bepul texnik qo'llab-quvvatlash xizmati ko'rsatiladi."},
+      {q:"O'rnatish xizmati bormi?",a:"Ha, A dan Z gacha: tanlash, yetkazib berish, o'rnatish, sozlash va muntazam texnik xizmat."},
+      {q:"Qancha kuchli generator kerakligini qanday aniqlayman?",a:"Bepul texnik maslahat uchun biz bilan bog'laning. Mutaxassislarimiz biznesingiz uchun eng mos generatorni hisoblab chiqadi."},
+      {q:"Viloyatlarga yetkazib berasizmi?",a:"Ha, Toshkent va barcha viloyatlarga operativ logistika xizmatimiz orqali yetkazib beramiz."},
+      {q:"To'lov qanday amalga oshiriladi?",a:"Naqd pul, bank o'tkazmasi yoki bo'lib to'lash imkoniyatlari mavjud. Menejerlarimizga murojaat qiling."},
+    ]},
+  contact:{tag:"Bog'lanish",title:"Ariza qoldiring",sub:"Biznesingiz uchun eng mos generatorni tanlashda bepul texnik maslahat oling.",
+    name:"Ismingiz",phone:"Telefon",company:"Kompaniya",role:"Lavozim",service:"Xizmat turi",power:"Kerakli quvvat",region:"Viloyat",source:"Qayerdan bildingiz?",msg:"Xabar (ixtiyoriy)",
+    submit:"Yuborish",submitting:"Yuborilmoqda...",ok:"Rahmat!",okTxt:"So'rovingiz qabul qilindi. Tez orada siz bilan bog'lanamiz.",err:"Xatolik yuz berdi. Qaytadan urinib ko'ring.",note:"Yuborish tugmasini bosib, shaxsiy ma'lumotlarni qayta ishlashga rozilik bildirasiz",
+    or:"yoki bevosita bog'laning",addr:"Toshkent shahri, ombor va xizmat markazi",hours:"Dush – Shan: 09:00 – 18:00",follow:"Ijtimoiy tarmoqlar",mapLink:"Yo'nalish olish →",back:"← Orqaga",
+    services:["Generator sotib olish","O'rnatish xizmati","Texnik servis / Ta'mirlash","Boshqa"],
+    powers:["16–50 kW (Kichik biznes)","50–200 kW (O'rta biznes)","200–500 kW (Yirik obyekt)","500–1000 kW (Sanoat)","1000 kW+ (Mega loyiha)","Bilmayman, maslahat kerak"],
+    regions:["Toshkent shahri","Toshkent viloyati","Samarqand","Buxoro","Farg'ona","Andijon","Namangan","Qashqadaryo","Surxondaryo","Xorazm","Navoiy","Jizzax","Sirdaryo","Qoraqalpog'iston"],
+    sources:["Instagram","Telegram","Google","Do'stim tavsiya qildi","Avval mijoz bo'lganman","Boshqa"],
+    modalSub:"Mutaxassisimiz 30 daqiqa ichida siz bilan bog'lanadi."},
+  footer:{desc:"O'zbekistonda 1-qo'l generatorlar ta'minotchisi. 2010-yildan beri 1000+ mijozga ishonchli xizmat ko'rsatib kelmoqdamiz.",slogan:"A dan Z gacha xizmat",pages:"Sahifalar",contact:"Bog'lanish",addr:"Manzil",copy:"Barcha huquqlar himoyalangan.",quality:"Sifat · Ishonch · Tajriba",p1:"Bosh sahifa",p2:"Xizmatlar",p3:"Loyihalar",p4:"Biz haqimizda",p5:"Kontakt"},
+},
+ru:{
+  hero:{badge:"Надёжный партнёр с 2010 года",t1:"Непрерывная",t1b:"энергия",t2:"для промышленности",sub:"Дизельные генераторы от 16 кВт до 2000 кВт. Напрямую от производителя — гарантия, доставка, монтаж и сервис.",cta:"Оставить заявку",cta2:"Проекты",mq:"Дизельные генераторы • 16 кВт – 2000 кВт • Услуги под ключ • 2 года бесплатного сервиса •"},
+  nav:{about:"О нас",services:"Услуги",projects:"Проекты",compare:"Почему мы?",reviews:"Отзывы",faq:"FAQ",cta:"Оставить заявку"},
+  stats:["Год основания","Довольных клиентов","Лет опыта","Техническая поддержка"],
+  heroStats:["Проектов","Лет опыта","кВт макс.","Поддержка"],
+  clients:"Компании, которые нам доверяют",
+  about:{tag:"О нас",title:'<em>Elegan Generator</em> — поставщик промышленных дизельных генераторов в Узбекистане <span style="font-weight:300;opacity:.7">с 16-летним опытом</span>.',text:'Поставляем генераторы напрямую с нашей производственной базы в Китае под брендом Elegan. Мы не перекупщики — доверие, качество и техническая поддержка наш стандарт.',link:"Подробнее"},
+  whyUs:{tag:"Наши преимущества",title:'Почему<br><span style="font-weight:300;color:var(--muted)">именно мы?</span>',badge:"Наше отличие",
+    items:[
+      {icon:"🏭",title:"Прямой производитель",desc:"Производим под собственным брендом — не перекупщики.",featured:true},
+      {icon:"🛡️",title:"1 год гарантии",desc:"Официальная заводская гарантия на все генераторы."},
+      {icon:"🔧",title:"Услуга под ключ",desc:"Подбор, доставка, монтаж и сервис."},
+      {icon:"🚚",title:"Быстрая доставка",desc:"Оперативная логистика по Ташкенту и регионам."},
+      {icon:"⏰",title:"2 года бесплатной поддержки",desc:"Местная техническая помощь — 24/7."},
+    ]},
+  services:{tag:"Услуги",title:'Генераторы <span style="font-weight:300;color:var(--muted)">и услуги</span>',btn:"Оставить заявку",
+    items:[
+      {icon:"⚡",kw:"16–50 кВт",title:"16–50 кВт Генераторы",desc:"Идеально для кафе, офисов, магазинов и малого производства.",service:"16-50 kW generator"},
+      {icon:"🏭",kw:"50–200 кВт",title:"50–200 кВт Генераторы",desc:"Для средних заводов, торговых центров и гостиниц.",service:"50-200 kW generator"},
+      {icon:"🔋",kw:"200–500 кВт",title:"200–500 кВт Генераторы",desc:"Для крупных промышленных предприятий и логистических центров.",service:"200-500 kW generator"},
+      {icon:"🚀",kw:"500–2000 кВт",title:"500–2000 кВт Генераторы",desc:"Мега-проекты и промышленные гиганты. Индивидуальное проектирование.",service:"500-2000 kW generator"},
+      {icon:"🔧",kw:"Под ключ",title:"Монтаж и наладка",desc:"Профессиональная установка, подключение к электросети и испытание.",service:"Монтаж и наладка"},
+      {icon:"🛡️",kw:"24/7",title:"Техническое обслуживание",desc:"Регулярный техосмотр, выездная бригада, запчасти 24/7.",service:"Техническое обслуживание"},
+    ]},
+  projects:{tag:"Проекты",title:'Компании, <span style="font-weight:300;color:var(--muted)">которые нам</span><br>доверяют',all:"Все проекты",
+    items:[
+      {title:"IT Park Ташкент",loc:"Ташкент",power:"2 × 640 кВт",total:"1280 кВт",desc:"Для бесперебойного энергоснабжения кампуса IT Park установлены два генератора по 640 кВт с системой АВР."},
+      {title:"UET & KOC Construction",loc:"Ташкент",power:"Многолетнее сотрудничество",total:"Стратегический клиент",desc:"Поставлены генераторы различной мощности для строительных площадок, ведётся техническое обслуживание."},
+      {title:"Хорезмский Соляной Завод",loc:"Хорезм",power:"500 кВт",total:"500 кВт",desc:"Для обеспечения непрерывной работы линий соледобычи установлен дизельный генератор 500 кВт."},
+      {title:"Ахангаранский Бетонный Завод",loc:"Ташкентская область",power:"200 кВт",total:"200 кВт",desc:"Для бетоносмесительного комплекса поставлен генератор 200 кВт с автоматическим запуском."},
+    ]},
+  compare:{tag:"Почему мы?",title:'Наши отличия <span style="font-weight:300;color:var(--muted)">от других</span>',us:"Elegan Generator",them:"Другие поставщики",cta:"Оставить заявку →",
+    feats:["Прямой производитель","1 год официальной гарантии","2 года бесплатного сервиса","Услуга монтажа и наладки","Поддержка 24/7","Доставка по всему Узбекистану","Персональная техническая консультация","Обеспечение запчастями"]},
+  reviews:{tag:"Отзывы клиентов",title:'Что о нас <span style="font-weight:300;color:var(--muted)">говорят</span>',
+    items:[
+      {n:"Жасур Тошматов",r:"IT Park — Технический директор",t:"С командой Elegan работать очень комфортно. От монтажа до сервиса — всё вовремя и качественно."},
+      {n:"Дилноза Юсупова",r:"Masa & Casa — Владелец",t:"С момента запуска генератора не было ни одной проблемы. Гарантия и техподдержка на высшем уровне."},
+      {n:"Бобур Рахимов",r:"Хорезмский Соляной Завод — Директор",t:"Генератор на 500 кВт работает бесперебойно уже 2 года. Технический отдел всегда на связи."},
+      {n:"Сарвар Мирзаев",r:"Ахангаранский Бетон — Инженер",t:"Цена и качество на высоте. По сравнению с другими вариантами — значительно выгоднее."},
+      {n:"Азиза Каримова",r:"Mega Mall — FM директор",t:"Для торгового центра установили 3 генератора. Всё выполнено профессионально."},
+    ]},
+  faq:{tag:"Вопросы и ответы",title:'Часто задаваемые <span style="font-weight:300;color:var(--muted)">вопросы</span>',
+    items:[
+      {q:"Где производятся генераторы?",a:"Все генераторы производятся на собственной базе в Китае под брендом Elegan. Мы не перекупщик."},
+      {q:"Каков срок гарантии?",a:"1 год официальной заводской гарантии и 2 года бесплатного технического обслуживания."},
+      {q:"Есть ли услуга монтажа?",a:"Да, полный комплекс: подбор, доставка, монтаж, наладка и регулярное техобслуживание."},
+      {q:"Как определить нужную мощность?",a:"Свяжитесь с нами для бесплатной консультации. Специалисты рассчитают оптимальный вариант."},
+      {q:"Осуществляете ли доставку в регионы?",a:"Да, доставляем в Ташкент и все регионы Узбекистана."},
+      {q:"Как производится оплата?",a:"Наличный расчёт, банковский перевод или рассрочка. Подробности у наших менеджеров."},
+    ]},
+  contact:{tag:"Контакт",title:"Оставить заявку",sub:"Получите бесплатную техническую консультацию по подбору генератора.",
+    name:"Ваше имя",phone:"Телефон",company:"Компания",role:"Должность",service:"Тип услуги",power:"Нужная мощность",region:"Регион",source:"Откуда узнали?",msg:"Сообщение (необязательно)",
+    submit:"Отправить",submitting:"Отправляется...",ok:"Спасибо!",okTxt:"Заявка принята. Мы свяжемся с вами в ближайшее время.",err:"Произошла ошибка. Попробуйте ещё раз.",note:"Нажимая кнопку, вы соглашаетесь на обработку персональных данных",
+    or:"или свяжитесь напрямую",addr:"г. Ташкент, склад и сервисный центр",hours:"Пн – Сб: 09:00 – 18:00",follow:"Социальные сети",mapLink:"Проложить маршрут →",back:"← Назад",
+    services:["Купить генератор","Монтаж и наладка","Техническое обслуживание","Другое"],
+    powers:["16–50 кВт (Малый бизнес)","50–200 кВт (Средний бизнес)","200–500 кВт (Крупный объект)","500–1000 кВт (Промышленность)","1000 кВт+ (Мега-проект)","Не знаю, нужна консультация"],
+    regions:["г. Ташкент","Ташкентская область","Самарканд","Бухара","Фергана","Андижан","Наманган","Кашкадарья","Сурхандарья","Хорезм","Навои","Джизак","Сырдарья","Каракалпакстан"],
+    sources:["Instagram","Telegram","Google","Рекомендация друга","Уже был клиентом","Другое"],
+    modalSub:"Наш специалист свяжется с вами в течение 30 минут."},
+  footer:{desc:"Прямой поставщик генераторов в Узбекистане. С 2010 года обслуживаем 1000+ клиентов.",slogan:"Услуги под ключ",pages:"Страницы",contact:"Контакты",addr:"Адрес",copy:"Все права защищены.",quality:"Качество · Доверие · Опыт",p1:"Главная",p2:"Услуги",p3:"Проекты",p4:"О нас",p5:"Контакт"},
+},
+en:{
+  hero:{badge:"Trusted partner since 2010",t1:"Uninterrupted",t1b:"power",t2:"for industry",sub:"Diesel generators from 16 kW to 2000 kW. Directly from the manufacturer — warranty, delivery, installation and service.",cta:"Get a Quote",cta2:"Our Projects",mq:"Diesel Generators • 16 kW – 2000 kW • Full Service • 2 Years Free Support •"},
+  nav:{about:"About",services:"Services",projects:"Projects",compare:"Why Us?",reviews:"Reviews",faq:"FAQ",cta:"Get a Quote"},
+  stats:["In operation since","Happy clients","Years experience","Technical support"],
+  heroStats:["Projects","Years exp.","kW max","Support"],
+  clients:"Companies that trust us",
+  about:{tag:"About Us",title:'<em>Elegan Generator</em> — Uzbekistan\'s industrial diesel generator supplier <span style="font-weight:300;opacity:.7">with 16 years of experience</span>.',text:'We deliver generators directly from our own manufacturing base in China under the Elegan brand. We\'re not a reseller — trust, quality and technical support are our standard.',link:"Learn more"},
+  whyUs:{tag:"Our advantages",title:'Why<br><span style="font-weight:300;color:var(--muted)">choose us?</span>',badge:"Our difference",
+    items:[
+      {icon:"🏭",title:"Direct manufacturer",desc:"We produce under our own brand — not a reseller.",featured:true},
+      {icon:"🛡️",title:"1-year warranty",desc:"Official factory warranty on all generators."},
+      {icon:"🔧",title:"Full service",desc:"Selection, delivery, installation and service."},
+      {icon:"🚚",title:"Fast delivery",desc:"Express logistics to Tashkent and all regions."},
+      {icon:"⏰",title:"2 years free support",desc:"Local technical assistance — 24/7."},
+    ]},
+  services:{tag:"Services",title:'Generators <span style="font-weight:300;color:var(--muted)">& services</span>',btn:"Get a Quote",
+    items:[
+      {icon:"⚡",kw:"16–50 kW",title:"16–50 kW Generators",desc:"Ideal for cafes, offices, shops and small production.",service:"16-50 kW generator"},
+      {icon:"🏭",kw:"50–200 kW",title:"50–200 kW Generators",desc:"For medium factories, shopping centers and hotels.",service:"50-200 kW generator"},
+      {icon:"🔋",kw:"200–500 kW",title:"200–500 kW Generators",desc:"For large industrial enterprises and logistics centers.",service:"200-500 kW generator"},
+      {icon:"🚀",kw:"500–2000 kW",title:"500–2000 kW Generators",desc:"Mega projects and industrial giants. Custom engineering.",service:"500-2000 kW generator"},
+      {icon:"🔧",kw:"Turnkey",title:"Installation & Commissioning",desc:"Professional installation, electrical connection, testing and launch.",service:"Installation service"},
+      {icon:"🛡️",kw:"24/7",title:"Technical Service",desc:"Regular maintenance, rapid response team, spare parts 24/7.",service:"Technical service"},
+    ]},
+  projects:{tag:"Projects",title:'Companies <span style="font-weight:300;color:var(--muted)">that</span><br>trust us',all:"All projects",
+    items:[
+      {title:"IT Park Tashkent",loc:"Tashkent",power:"2 × 640 kW",total:"1280 kW",desc:"Two 640 kW generators were installed with ATS system to ensure uninterrupted power supply for the IT Park campus."},
+      {title:"UET & KOC Construction",loc:"Tashkent",power:"Long-term partnership",total:"Strategic client",desc:"Generators of various capacities were supplied and serviced for construction sites."},
+      {title:"Khorezm Salt Factory",loc:"Khorezm",power:"500 kW",total:"500 kW",desc:"A 500 kW diesel generator was installed to ensure continuous power supply for salt production lines."},
+      {title:"Angren Concrete Plant",loc:"Tashkent region",power:"200 kW",total:"200 kW",desc:"A 200 kW generator with automatic start was supplied for the concrete mixing complex."},
+    ]},
+  compare:{tag:"Why Us?",title:'How we differ <span style="font-weight:300;color:var(--muted)">from others</span>',us:"Elegan Generator",them:"Other suppliers",cta:"Get a Quote →",
+    feats:["Direct manufacturer","1-year official warranty","2 years free technical service","Installation & commissioning","24/7 support","Delivery across Uzbekistan","Personal technical consultation","Spare parts supply"]},
+  reviews:{tag:"Client Reviews",title:'What people say <span style="font-weight:300;color:var(--muted)">about us</span>',
+    items:[
+      {n:"Jasur Toshmatov",r:"IT Park — Technical Director",t:"Working with Elegan is very convenient. From installation to service — everything on time and high quality."},
+      {n:"Dilnoza Yusupova",r:"Masa & Casa — Owner",t:"Since the generator was installed, there has been no issue at all. Warranty and technical support are excellent."},
+      {n:"Bobur Rahimov",r:"Khorezm Salt Factory — Director",t:"The 500 kW generator has been running non-stop for 2 years. Technical team is always available."},
+      {n:"Sarvar Mirzayev",r:"Angren Concrete — Engineer",t:"Great price and quality. Significantly more cost-effective compared to other options."},
+      {n:"Aziza Karimova",r:"Mega Mall — FM Director",t:"3 generators installed for our shopping mall. Everything done professionally."},
+    ]},
+  faq:{tag:"FAQ",title:'Frequently asked <span style="font-weight:300;color:var(--muted)">questions</span>',
+    items:[
+      {q:"Where are the generators manufactured?",a:"All generators are produced at our own base in China under the Elegan brand. We are not a reseller."},
+      {q:"What is the warranty period?",a:"1-year official factory warranty plus 2 years of free technical support."},
+      {q:"Do you offer installation service?",a:"Yes, full service: selection, delivery, installation, commissioning and regular maintenance."},
+      {q:"How do I determine the required power?",a:"Contact us for a free consultation. Our specialists will calculate the optimal generator."},
+      {q:"Do you deliver to regions?",a:"Yes, we deliver to Tashkent and all regions of Uzbekistan."},
+      {q:"How is payment made?",a:"Cash, bank transfer or installment. Contact our managers for details."},
+    ]},
+  contact:{tag:"Get in Touch",title:"Leave a Request",sub:"Get a free technical consultation to choose the right generator for your business.",
+    name:"Your name",phone:"Phone",company:"Company",role:"Position",service:"Service type",power:"Required power",region:"Region",source:"How did you find us?",msg:"Message (optional)",
+    submit:"Send",submitting:"Sending...",ok:"Thank you!",okTxt:"Your request has been received. We will contact you shortly.",err:"An error occurred. Please try again.",note:"By clicking send, you agree to the processing of personal data",
+    or:"or contact directly",addr:"Tashkent city, warehouse and service center",hours:"Mon – Sat: 09:00 – 18:00",follow:"Social Media",mapLink:"Get directions →",back:"← Back",
+    services:["Buy a generator","Installation & commissioning","Technical service / Repair","Other"],
+    powers:["16–50 kW (Small business)","50–200 kW (Medium business)","200–500 kW (Large facility)","500–1000 kW (Industrial)","1000 kW+ (Mega project)","I don't know, need advice"],
+    regions:["Tashkent city","Tashkent region","Samarkand","Bukhara","Fergana","Andijan","Namangan","Kashkadarya","Surkhandarya","Khorezm","Navoi","Jizzakh","Sirdarya","Karakalpakstan"],
+    sources:["Instagram","Telegram","Google","Friend's recommendation","Was a client before","Other"],
+    modalSub:"Our specialist will contact you within 30 minutes."},
+  footer:{desc:"Direct generator supplier in Uzbekistan. Serving 1000+ clients since 2010.",slogan:"Full service A to Z",pages:"Pages",contact:"Contact",addr:"Address",copy:"All rights reserved.",quality:"Quality · Trust · Experience",p1:"Home",p2:"Services",p3:"Projects",p4:"About",p5:"Contact"},
+}};
+
+const CLIENTS = ["IT Park","Uztelecom","Yaqeen Group","Ansor","Stimorol","UET Construction","KOC Construction","Santini","Karvon","Bonanza","Aurium Balik","Masa & Casa"];
+
+let lang = "uz";
+let activeFaq = null;
+let currentSvc = "";
+
+// ─── TELEGRAM ──────────────────────────────────────────────────────
+async function sendTelegram(data) {
+  if (!BOT_TOKEN || !CHAT_ID) {
+    console.log("📋 Telegram not configured (dev mode). Form data:", data);
+    return true;
+  }
+  const lines = [
+    "🔔 *Yangi ariza — Elegan Generator*",
+    "────────────────────────",
+    `👤 *Ism:* ${data.name}`,
+    `📞 *Telefon:* ${data.phone}`,
+  ];
+  if (data.company) lines.push(`🏢 *Kompaniya:* ${data.company}`);
+  if (data.role)    lines.push(`💼 *Lavozim:* ${data.role}`);
+  if (data.service) lines.push(`⚙️ *Xizmat:* ${data.service}`);
+  if (data.power)   lines.push(`⚡ *Quvvat:* ${data.power}`);
+  if (data.region)  lines.push(`📍 *Viloyat:* ${data.region}`);
+  if (data.source)  lines.push(`📣 *Manba:* ${data.source}`);
+  if (data.message) lines.push(`💬 *Xabar:* ${data.message}`);
+  lines.push(`🌐 *Til:* ${(data.lang||"uz").toUpperCase()}`);
+  lines.push("────────────────────────");
+  lines.push(`🕐 *Vaqt:* ${new Date().toLocaleString("uz-UZ",{timeZone:"Asia/Tashkent"})}`);
+  try {
+    const r = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`,{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({chat_id:CHAT_ID,text:lines.join("\n"),parse_mode:"Markdown"})
+    });
+    const j = await r.json();
+    return j.ok;
+  } catch(e) {
+    console.error("Telegram error:",e);
+    return false;
+  }
+}
+
+// ─── MODAL ─────────────────────────────────────────────────────────
+function openModal(svcKey) {
+  const t = T[lang];
+  const c = t.contact;
+  const svc = t.services.items.find(s => s.service === svcKey);
+  currentSvc = svcKey;
+
+  document.getElementById("m-tag").textContent = "⚡ " + (svc ? svc.kw : "Generator");
+  document.getElementById("m-title").textContent = svc ? svc.title : t.hero.cta;
+  document.getElementById("m-sub").textContent = c.modalSub;
+  document.getElementById("modal-note-txt").textContent = c.note;
+  document.getElementById("ml-name").textContent = c.name;
+  document.getElementById("ml-phone").textContent = c.phone;
+  document.getElementById("ml-company").textContent = c.company;
+  document.getElementById("ml-role").textContent = c.role;
+  document.getElementById("ml-region").textContent = c.region;
+  document.getElementById("ml-power").textContent = c.power;
+  document.getElementById("ml-source").textContent = c.source;
+  document.getElementById("mf-service").value = svc ? svc.service : "";
+  document.getElementById("modal-submit-txt").textContent = c.submit;
+
+  fillSelect("mf-region", c.regions, c.region + "...");
+  fillSelect("mf-power", c.powers, c.power + "...");
+  fillSelect("mf-source", c.sources, c.source + "...");
+
+  ["mf-name","mf-phone","mf-company","mf-role"].forEach(id => document.getElementById(id).value = "");
+  document.getElementById("modal-error").classList.add("hidden");
+  document.getElementById("modal-form").classList.remove("hidden");
+  document.getElementById("modal-success").classList.add("hidden");
+  document.getElementById("modal-submit-btn").disabled = false;
+
+  document.getElementById("modal-overlay").classList.add("show");
+  document.body.style.overflow = "hidden";
+}
+
+function closeModal(e) {
+  if (e.target === document.getElementById("modal-overlay")) closeModalDir();
+}
+function closeModalDir() {
+  document.getElementById("modal-overlay").classList.remove("show");
+  document.body.style.overflow = "";
+}
+document.addEventListener("keydown", e => { if (e.key === "Escape") closeModalDir(); });
+
+async function submitModal() {
+  const t = T[lang].contact;
+  const name = document.getElementById("mf-name").value.trim();
+  const phone = document.getElementById("mf-phone").value.trim();
+  if (!name || !phone) return;
+
+  const btn = document.getElementById("modal-submit-btn");
+  const txt = document.getElementById("modal-submit-txt");
+  btn.disabled = true;
+  txt.innerHTML = '<span class="spinner"></span> ' + t.submitting;
+
+  const ok = await sendTelegram({
+    name, phone,
+    company: document.getElementById("mf-company").value,
+    role: document.getElementById("mf-role").value,
+    service: document.getElementById("mf-service").value || currentSvc,
+    power: document.getElementById("mf-power").value,
+    region: document.getElementById("mf-region").value,
+    source: document.getElementById("mf-source").value,
+    lang,
+  });
+
+  if (ok) {
+    document.getElementById("modal-form").classList.add("hidden");
+    document.getElementById("modal-success").classList.remove("hidden");
+    document.getElementById("modal-ok-title").textContent = t.ok;
+    document.getElementById("modal-ok-text").textContent = t.okTxt;
+    setTimeout(() => closeModalDir(), 3500);
+  } else {
+    document.getElementById("modal-error-txt").textContent = t.err;
+    document.getElementById("modal-error").classList.remove("hidden");
+    btn.disabled = false;
+    txt.textContent = t.submit;
+  }
+}
+
+// ─── CONTACT FORM ──────────────────────────────────────────────────
+async function handleContactSend() {
+  const t = T[lang].contact;
+  const name = document.getElementById("f-name").value.trim();
+  const phone = document.getElementById("f-phone").value.trim();
+  if (!name || !phone) return;
+
+  const btn = document.getElementById("contact-submit-btn");
+  const txt = document.getElementById("contact-submit-txt");
+  btn.disabled = true;
+  txt.innerHTML = '<span class="spinner" style="border-top-color:var(--navy)"></span> ' + t.submitting;
+
+  const ok = await sendTelegram({
+    name, phone,
+    company: document.getElementById("f-company").value,
+    role: document.getElementById("f-role").value,
+    service: document.getElementById("f-service").value,
+    power: document.getElementById("f-power").value,
+    region: document.getElementById("f-region").value,
+    source: document.getElementById("f-source").value,
+    message: document.getElementById("f-msg").value,
+    lang,
+  });
+
+  if (ok) {
+    document.getElementById("contact-form").classList.add("hidden");
+    document.getElementById("contact-success").classList.remove("hidden");
+    document.getElementById("con-ok-title").textContent = t.ok;
+    document.getElementById("con-ok-text").textContent = t.okTxt;
+    document.getElementById("con-back-btn").textContent = t.back;
+  } else {
+    document.getElementById("contact-error-txt").textContent = t.err;
+    document.getElementById("contact-error").classList.remove("hidden");
+    btn.disabled = false;
+    txt.textContent = t.submit;
+  }
+}
+
+function resetContactForm() {
+  const t = T[lang].contact;
+  document.getElementById("contact-form").classList.remove("hidden");
+  document.getElementById("contact-success").classList.add("hidden");
+  document.getElementById("contact-submit-btn").disabled = false;
+  document.getElementById("contact-submit-txt").textContent = t.submit;
+  ["f-name","f-phone","f-company","f-role","f-msg"].forEach(id => document.getElementById(id).value = "");
+}
+
+// ─── HELPERS ───────────────────────────────────────────────────────
+function fillSelect(id, options, placeholder) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.innerHTML = `<option value="">${placeholder}</option>` +
+    options.map(o => `<option value="${o}">${o}</option>`).join("");
+}
+
+// ─── LANG SWITCH ───────────────────────────────────────────────────
+function setLang(l) {
+  lang = l;
+  document.querySelectorAll(".lb").forEach((b,i) => {
+    const ls = ["uz","ru","en"];
+    b.classList.toggle("active", ls[i] === l);
+  });
+  render();
+}
+
+// ─── RENDER ────────────────────────────────────────────────────────
+function render() {
+  const t = T[lang];
+  const c = t.contact;
+  const f = t.footer;
+
+  // Nav
+  document.getElementById("nl-about").textContent = t.nav.about;
+  document.getElementById("nl-services").textContent = t.nav.services;
+  document.getElementById("nl-projects").textContent = t.nav.projects;
+  document.getElementById("nl-compare").textContent = t.nav.compare;
+  document.getElementById("nl-reviews").textContent = t.nav.reviews;
+  document.getElementById("nl-faq").textContent = t.nav.faq;
+  document.getElementById("nl-cta").textContent = t.nav.cta;
+
+  // Hero
+  document.getElementById("hero-badge").textContent = t.hero.badge;
+  document.getElementById("hero-title").innerHTML = `<em>${t.hero.t1}</em> ${t.hero.t1b}<br><span style="font-weight:300;opacity:.85">${t.hero.t2}</span>`;
+  document.getElementById("hero-sub").textContent = t.hero.sub;
+  document.getElementById("hero-cta").textContent = t.hero.cta;
+  document.getElementById("hero-cta2").textContent = t.hero.cta2;
+  document.querySelectorAll("[id^='mq1-txt']").forEach(el => el.textContent = t.hero.mq);
+  t.heroStats.forEach((s,i) => { const el = document.getElementById("hs-"+i); if(el) el.textContent = s; });
+
+  // Stats
+  document.getElementById("stat-0").textContent = t.stats[0];
+  document.getElementById("stat-1").textContent = t.stats[1];
+  document.getElementById("stat-2").textContent = t.stats[2];
+  document.getElementById("stat-3").textContent = t.stats[3];
+
+  // Clients
+  document.getElementById("clients-label").textContent = t.clients;
+  buildClients();
+
+  // About
+  document.getElementById("about-tag").textContent = "— " + t.about.tag;
+  document.getElementById("about-title").innerHTML = t.about.title;
+  document.getElementById("about-text").textContent = t.about.text;
+  document.getElementById("about-link-txt").textContent = t.about.link;
+
+  // Why Us
+  document.getElementById("why-tag").textContent = "— " + t.whyUs.tag;
+  document.getElementById("why-title").innerHTML = t.whyUs.title;
+  buildWhyUs(t.whyUs);
+
+  // Services
+  document.getElementById("svc-tag").textContent = "— " + t.services.tag;
+  document.getElementById("svc-title").innerHTML = t.services.title;
+  buildServices(t.services);
+
+  // Projects
+  document.getElementById("proj-tag").textContent = "— " + t.projects.tag;
+  document.getElementById("proj-title").innerHTML = t.projects.title;
+  document.getElementById("proj-all").childNodes[0].textContent = t.projects.all + " ";
+  buildProjects(t.projects);
+
+  // Compare
+  document.getElementById("cmp-tag").textContent = "— " + t.compare.tag;
+  document.getElementById("cmp-title").innerHTML = t.compare.title;
+  document.getElementById("cmp-us").textContent = t.compare.us;
+  document.getElementById("cmp-them").textContent = t.compare.them;
+  document.getElementById("cmp-cta").textContent = t.compare.cta;
+  buildCompare(t.compare);
+
+  // Reviews
+  document.getElementById("rev-tag").textContent = "— " + t.reviews.tag;
+  document.getElementById("rev-title").innerHTML = t.reviews.title;
+  buildReviews(t.reviews);
+
+  // FAQ
+  document.getElementById("faq-tag").textContent = "— " + t.faq.tag;
+  document.getElementById("faq-title").innerHTML = t.faq.title;
+  buildFaq(t.faq);
+
+  // Contact
+  document.getElementById("con-tag").textContent = "— " + c.tag;
+  document.getElementById("con-title").textContent = c.title;
+  document.getElementById("con-sub").textContent = c.sub;
+  document.getElementById("lbl-name").textContent = c.name;
+  document.getElementById("lbl-phone").textContent = c.phone;
+  document.getElementById("lbl-company").textContent = c.company;
+  document.getElementById("lbl-role").textContent = c.role;
+  document.getElementById("lbl-service").textContent = c.service;
+  document.getElementById("lbl-power").textContent = c.power;
+  document.getElementById("lbl-region").textContent = c.region;
+  document.getElementById("lbl-source").textContent = c.source;
+  document.getElementById("lbl-msg").textContent = c.msg;
+  document.getElementById("contact-submit-txt").textContent = c.submit;
+  document.getElementById("con-note").textContent = c.note;
+  document.getElementById("con-or").textContent = c.or;
+  document.getElementById("con-addr").textContent = c.addr;
+  document.getElementById("con-hours").textContent = c.hours;
+  document.getElementById("con-follow").textContent = c.follow;
+  document.getElementById("map-link").textContent = c.mapLink;
+
+  fillSelect("f-service", c.services, c.service + "...");
+  fillSelect("f-power", c.powers, c.power + "...");
+  fillSelect("f-region", c.regions, c.region + "...");
+  fillSelect("f-source", c.sources, c.source + "...");
+
+  // Footer
+  document.getElementById("f-desc").textContent = f.desc;
+  document.getElementById("f-slogan").textContent = f.slogan;
+  document.getElementById("f-pages-title").textContent = f.pages;
+  document.getElementById("f-con-title").textContent = f.contact;
+  document.getElementById("f-addr-title").textContent = f.addr;
+  document.getElementById("f-addr").textContent = c.addr;
+  document.getElementById("f-copy").textContent = f.copy;
+  document.getElementById("f-quality").textContent = f.quality;
+  document.getElementById("f-p1").textContent = f.p1;
+  document.getElementById("f-p2").textContent = f.p2;
+  document.getElementById("f-p3").textContent = f.p3;
+  document.getElementById("f-p4").textContent = f.p4;
+  document.getElementById("f-p5").textContent = f.p5;
+}
+
+// ─── BUILDERS ──────────────────────────────────────────────────────
+function buildClients() {
+  const track = document.getElementById("clients-track");
+  const all = [...CLIENTS, ...CLIENTS, ...CLIENTS];
+  track.innerHTML = all.map(n => `<div class="client-logo-card"><span>${n}</span></div>`).join("");
+}
+
+function buildWhyUs(wu) {
+  const g = document.getElementById("why-grid");
+  g.innerHTML = wu.items.map((item, i) => `
+    <div class="why-card ${item.featured ? 'featured' : ''} anim-up" style="transition-delay:${i*0.08}s">
+      ${item.featured ? `<span class="why-badge">${wu.badge}</span>` : ""}
+      <div class="why-icon ${item.featured ? 'dark' : 'light'}">${item.icon}</div>
+      <h3 class="why-title">${item.title}</h3>
+      <p class="why-desc">${item.desc}</p>
+    </div>`).join("");
+  observeAnims();
+}
+
+function buildServices(svc) {
+  const g = document.getElementById("svc-grid");
+  g.innerHTML = svc.items.map((s, i) => `
+    <div class="svc-card anim-up" style="transition-delay:${i*0.07}s">
+      <div class="svc-icon">${s.icon}</div>
+      <div class="svc-kw">${s.kw}</div>
+      <h3 class="svc-title">${s.title}</h3>
+      <p class="svc-desc">${s.desc}</p>
+      <button class="svc-btn" onclick="openModal('${s.service}')">
+        ${svc.btn}
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7,7 17,7 17,17"/></svg>
+      </button>
+    </div>`).join("");
+  observeAnims();
+}
+
+function buildProjects(pr) {
+  const g = document.getElementById("proj-grid");
+  const colors = ["#0f2d5e","#1a4a8a","#163d73","#0d2448"];
+  g.innerHTML = pr.items.map((p, i) => `
+    <div class="proj-card anim-up" style="transition-delay:${i*0.1}s;background:${colors[i]}">
+      <div class="proj-card-overlay"></div>
+      <div class="proj-card-body">
+        <div class="proj-kw-badge">⚡ ${p.total}</div>
+        <div class="proj-card-title">${p.title}</div>
+        <div class="proj-card-loc">${p.loc} · ${p.power}</div>
+      </div>
+      <div class="proj-arrow">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7,7 17,7 17,17"/></svg>
+      </div>
+    </div>`).join("");
+  observeAnims();
+}
+
+function buildCompare(cmp) {
+  document.getElementById("cmp-rows").innerHTML = cmp.feats.map((f, i) => `
+    <div class="compare-row" style="background:${i%2?'#fff':'#f9fafd'}">
+      <div class="compare-feat" style="background:${i%2?'#fff':'#f9fafd'}">${f}</div>
+      <div class="compare-yes" style="background:${i%2?'rgba(15,35,71,.02)':'rgba(15,35,71,.04)'}">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1a6b3a" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22,4 12,14.01 9,11.01"/></svg>
+      </div>
+      <div class="compare-no" style="background:${i%2?'#fff':'#f9fafd'}">
+        ${i<4 
+          ? '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c8d4e8" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>'
+          : '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c8d4e8" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22,4 12,14.01 9,11.01"/></svg>'}
+      </div>
+    </div>`).join("");
+}
+
+function buildReviews(rev) {
+  document.getElementById("reviews-grid").innerHTML = rev.items.map(r => `
+    <div class="review-card">
+      <div class="yt-area">
+        <div class="yt-play">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58a2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75,15.02 15.5,12 9.75,8.98 9.75,15.02" fill="#ff0000"/></svg>
+        </div>
+        <span class="yt-reviewer">${r.n}</span>
+        <span class="yt-label">YouTube</span>
+      </div>
+      <div class="review-body">
+        <div class="stars">${'<span class="star">★</span>'.repeat(5)}</div>
+        <p class="review-text">${r.t}</p>
+        <div class="reviewer-name">${r.n}</div>
+        <div class="reviewer-role">${r.r}</div>
+      </div>
+    </div>`).join("");
+}
+
+function buildFaq(faq) {
+  activeFaq = null;
+  document.getElementById("faq-list").innerHTML = faq.items.map((item, i) => `
+    <div class="faq-item" id="fi-${i}">
+      <button class="faq-btn" id="fb-${i}" onclick="toggleFaq(${i})">
+        <span class="faq-question">${item.q}</span>
+        <span class="faq-icon" id="ficon-${i}">▾</span>
+      </button>
+      <div class="faq-body" id="fbody-${i}">
+        <p class="faq-answer">${item.a}</p>
+      </div>
+    </div>`).join("");
+}
+
+function toggleFaq(i) {
+  const isOpen = activeFaq === i;
+  if (activeFaq !== null) {
+    document.getElementById("fbody-" + activeFaq).style.maxHeight = "0";
+    document.getElementById("ficon-" + activeFaq).style.transform = "rotate(0deg)";
+    document.getElementById("fb-" + activeFaq).classList.remove("open");
+    document.getElementById("fi-" + activeFaq).classList.remove("open");
+  }
+  if (!isOpen) {
+    activeFaq = i;
+    const body = document.getElementById("fbody-" + i);
+    body.style.maxHeight = body.scrollHeight + 40 + "px";
+    document.getElementById("ficon-" + i).style.transform = "rotate(180deg)";
+    document.getElementById("fb-" + i).classList.add("open");
+    document.getElementById("fi-" + i).classList.add("open");
+  } else {
+    activeFaq = null;
+  }
+}
+
+// ─── NAVBAR SCROLL ─────────────────────────────────────────────────
+window.addEventListener("scroll", () => {
+  document.getElementById("navbar").classList.toggle("scrolled", window.scrollY > 50);
+}, { passive: true });
+
+// ─── SCROLL REVEAL ─────────────────────────────────────────────────
+function observeAnims() {
+  const els = document.querySelectorAll(".anim-up:not(.visible)");
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add("visible"); obs.unobserve(e.target); } });
+  }, { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
+  els.forEach(el => obs.observe(el));
+}
+
+// ─── INIT ──────────────────────────────────────────────────────────
+render();
+observeAnims();
+</script>
+</body>
+</html>
